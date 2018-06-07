@@ -41,6 +41,16 @@ export const findAllTopicsForLesson = (dispatch, lesson) => {
         }));
 }
 
+export const findAllWidgetsForLessonTopic = (dispatch, lessonId, topic) => {
+    return fetch(HOST + '/api/lessons/' + lessonId + '/topics/' + topic.id + '/widgets')
+        .then(getJSON)
+        .then(widgets => dispatch({
+            type: constants.FIND_WIDGETS_FOR_LESSON_TOPIC,
+            widgets: widgets,
+            topic: topic
+        }));
+};
+
 function getJSON(response) {
     return response.json();
 }

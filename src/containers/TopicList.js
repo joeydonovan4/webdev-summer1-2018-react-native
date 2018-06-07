@@ -16,7 +16,13 @@ class TopicList extends Component {
     renderTopics() {
         if (this.props.topics) {
             return this.props.topics.map(topic => (
-                <ListItem title={topic.title} key={topic.id}/>
+                <ListItem title={topic.title} key={topic.id}
+                    onPress={() => {
+                        this.props.navigation.navigate('WidgetList', {
+                            topic: {id: topic.id, name: topic.title},
+                            lessonId: this.props.lesson.id
+                        })
+                    }}/>
             ));
         }
         return null;
