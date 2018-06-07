@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
-import { View } from "react-native";
-import { Text, ListItem } from "react-native-elements";
+import { Text, ListItem, List } from "react-native-elements";
 
 class CourseList extends Component {
     static navigationOptions = {title: 'Courses'};
@@ -22,9 +21,9 @@ class CourseList extends Component {
 
     render() {
         return (
-            <View style={{padding: 15}}>
+            <List>
                 {this.renderCourses()}
-            </View>
+            </List>
         )
     }
 }
