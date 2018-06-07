@@ -13,7 +13,12 @@ class CourseList extends Component {
     renderCourses() {
         if (this.props.courses) {
             return this.props.courses.map(course => (
-                <ListItem title={course.title} key={course.id}/>
+                <ListItem title={course.title} key={course.id}
+                    onPress={() => {
+                        this.props.navigation.navigate('ModuleList', {
+                            courseId: course.id
+                        });
+                    }}/>
             ))
         }
         return null;
@@ -29,7 +34,7 @@ class CourseList extends Component {
 }
 
 const stateToPropertiesMapper = (state) => ({
-    courses: state.courses,
+    courses: state.courseReducer.courses,
 });
 
 const dispatcherToPropsMapper = dispatch => ({

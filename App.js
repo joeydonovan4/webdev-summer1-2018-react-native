@@ -4,6 +4,7 @@ import store from './src/store/index';
 import { createStackNavigator } from "react-navigation";
 import Home from "./src/components/Home";
 import CourseListContainer from './src/containers/CourseList';
+import ModuleListContainer from './src/containers/ModuleList';
 
 class App extends Component {
   render() {
@@ -18,5 +19,6 @@ export default App;
 
 const Navigator = createStackNavigator({
   Home,
-  CourseList: {screen: CourseListContainer}
+  CourseList: {screen: CourseListContainer},
+  ModuleList: {screen: ModuleListContainer}
 });

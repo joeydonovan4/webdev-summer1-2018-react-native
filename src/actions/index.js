@@ -12,6 +12,15 @@ export const findAllCourses = dispatch => {
         }));
 };
 
+export const findAllModulesForCourse = (dispatch, courseId) => {
+    fetch(HOST + '/api/courses/' + courseId + '/modules')
+        .then(getJSON)
+        .then(modules => dispatch({
+            type: constants.FIND_MODULES_FOR_COURSE,
+            modules: modules
+        }));
+}
+
 function getJSON(response) {
     return response.json();
 }
