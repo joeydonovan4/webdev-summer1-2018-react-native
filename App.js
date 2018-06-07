@@ -6,6 +6,7 @@ import Home from "./src/components/Home";
 import CourseListContainer from './src/containers/CourseList';
 import ModuleListContainer from './src/containers/ModuleList';
 import LessonListContainer from './src/containers/LessonList';
+import TopicListContainer from './src/containers/TopicList';
 
 class App extends Component {
   render() {
@@ -22,5 +23,6 @@ const Navigator = createStackNavigator({
   Home,
   CourseList: {screen: CourseListContainer},
   ModuleList: {screen: ModuleListContainer},
-  LessonList: LessonListContainer
+  LessonList: {screen: LessonListContainer},
+  TopicList: {screen: TopicListContainer}
 });

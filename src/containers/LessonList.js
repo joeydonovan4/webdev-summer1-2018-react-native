@@ -16,7 +16,12 @@ class LessonList extends Component {
     renderLessons() {
         if (this.props.lessons) {
             return this.props.lessons.map(lesson => (
-                <ListItem title={lesson.title} key={lesson.id}/>
+                <ListItem title={lesson.title} key={lesson.id}
+                    onPress={() => {
+                        this.props.navigation.navigate('TopicList', {
+                            lesson: {id: lesson.id, name: lesson.title}
+                        });
+                    }}/>
             ))
         }
         return null;
@@ -32,7 +37,8 @@ class LessonList extends Component {
 }
 
 const stateToPropertiesMapper = (state) => ({
-    lessons: state.lessonReducer.lessons
+    lessons: state.lessonReducer.lessons,
+    moduleId: state.lessonReducer.moduleId
 });
 
 const dispatcherToPropsMapper = dispatch => ({
