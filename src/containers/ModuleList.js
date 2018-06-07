@@ -15,7 +15,13 @@ class ModuleList extends Component {
     renderModules() {
         if (this.props.modules) {
             return this.props.modules.map(mod => (
-                <ListItem title={mod.title} key={mod.id}/>
+                <ListItem title={mod.title} key={mod.id}
+                    onPress={() => {
+                        this.props.navigation.navigate('LessonList', {
+                            moduleId: mod.id,
+                            courseId: this.props.courseId
+                        });
+                    }}/>
             ))
         }
         return null;
@@ -31,7 +37,8 @@ class ModuleList extends Component {
 }
 
 const stateToPropertiesMapper = (state) => ({
-    modules: state.moduleReducer.modules
+    modules: state.moduleReducer.modules,
+    courseId: state.moduleReducer.courseId
 });
 
 const dispatcherToPropsMapper = dispatch => ({

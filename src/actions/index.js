@@ -17,9 +17,19 @@ export const findAllModulesForCourse = (dispatch, courseId) => {
         .then(getJSON)
         .then(modules => dispatch({
             type: constants.FIND_MODULES_FOR_COURSE,
-            modules: modules
+            modules: modules,
+            courseId: courseId
         }));
 }
+
+export const findAllLessonsForModule = (dispatch, courseId, moduleId) => {
+    return fetch(HOST + '/api/courses/' + courseId + '/modules/' + moduleId + '/lessons')
+        .then(getJSON)
+        .then(lessons => dispatch({
+            type: constants.FIND_LESSONS_FOR_MODULE,
+            lessons: lessons
+        }));
+};
 
 function getJSON(response) {
     return response.json();
