@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
+import { View, StyleSheet } from "react-native";
 import { Text, ListItem, List } from "react-native-elements";
 
 class ModuleList extends Component {
@@ -8,8 +9,8 @@ class ModuleList extends Component {
 
     componentDidMount() {
         const { navigation } = this.props;
-        const courseId = navigation.getParam('courseId', 0);
-        this.props.findAllModulesForCourse(courseId);
+        const course = navigation.getParam('course', null);
+        this.props.findAllModulesForCourse(course);
     }
 
     renderModules() {
@@ -18,8 +19,8 @@ class ModuleList extends Component {
                 <ListItem title={mod.title} key={mod.id}
                     onPress={() => {
                         this.props.navigation.navigate('LessonList', {
-                            moduleId: mod.id,
-                            courseId: this.props.courseId
+                            module: {id: mod.id, name: mod.title},
+                            courseId: this.props.course.id
                         });
                     }}/>
             ))
@@ -29,20 +30,31 @@ class ModuleList extends Component {
 
     render() {
         return (
-            <List>
-                {this.renderModules()}
-            </List>
+            <View>
+                <Text h4 style={styles.header}>Modules for {this.props.course.name}</Text>
+                <List>
+                    {this.renderModules()}
+                </List>
+            </View>
         )
     }
 }
 
+const styles = StyleSheet.create({
+    header: {
+        textAlign: 'center',
+        marginTop: 2,
+        fontWeight: 'bold'
+    }
+});
+
 const stateToPropertiesMapper = (state) => ({
     modules: state.moduleReducer.modules,
-    courseId: state.moduleReducer.courseId
+    course: state.moduleReducer.course
 });
 
 const dispatcherToPropsMapper = dispatch => ({
-    findAllModulesForCourse: (courseId) => actions.findAllModulesForCourse(dispatch, courseId)
+    findAllModulesForCourse: (course) => actions.findAllModulesForCourse(dispatch, course)
 });
 
 const ModuleListContainer = connect(

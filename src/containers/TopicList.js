@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Text, ListItem, List } from "react-native-elements";
 
 class TopicList extends Component {
@@ -25,7 +25,7 @@ class TopicList extends Component {
     render() {
         return (
             <View>
-                <Text h4>Topics for {this.props.lesson.name}</Text>
+                <Text h4 style={styles.header}>Topics for {this.props.lesson.name}</Text>
                 <List>
                     {this.renderTopics()}
                 </List>
@@ -33,6 +33,14 @@ class TopicList extends Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+    header: {
+        textAlign: 'center',
+        marginTop: 2,
+        fontWeight: 'bold'
+    }
+});
 
 const stateToPropertiesMapper = (state) => ({
     topics: state.topicReducer.topics,

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
+import { View, StyleSheet } from "react-native";
 import { Text, ListItem, List } from "react-native-elements";
 
 class CourseList extends Component {
@@ -16,7 +17,7 @@ class CourseList extends Component {
                 <ListItem title={course.title} key={course.id}
                     onPress={() => {
                         this.props.navigation.navigate('ModuleList', {
-                            courseId: course.id
+                            course: {id: course.id, name: course.title}
                         });
                     }}/>
             ))
@@ -26,12 +27,23 @@ class CourseList extends Component {
 
     render() {
         return (
-            <List>
-                {this.renderCourses()}
-            </List>
+            <View>
+                <Text h4 style={styles.header}>All Courses</Text>
+                <List>
+                    {this.renderCourses()}
+                </List>
+            </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    header: {
+        textAlign: 'center',
+        marginTop: 2,
+        fontWeight: 'bold'
+    }
+});
 
 const stateToPropertiesMapper = (state) => ({
     courses: state.courseReducer.courses,
