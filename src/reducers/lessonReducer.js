@@ -1,10 +1,11 @@
-import * as constants from '../constants/index';
+import { FIND_LESSONS_FOR_MODULE } from '../constants/index';
 
-export const lessonReducer = (state = {lessons: []}, action) => {
+export const lessonReducer = (state = {lessons: [], moduleId: 0}, action) => {
     switch (action.type) {
-        case constants.FIND_LESSONS_FOR_MODULE:
+        case FIND_LESSONS_FOR_MODULE:
             return {
-                lessons: action.lessons
+                lessons: action.lessons,
+                moduleId: action.moduleId
             }
         default:
             return state;

@@ -1,10 +1,11 @@
-import * as constants from '../constants/index';
+import { FIND_ALL_COURSES } from '../constants/index';
 
 export const courseReducer = (state = {courses: []}, action) => {
     switch (action.type) {
-        case constants.FIND_ALL_COURSES:
-            state.courses = action.courses;
-            return state;
+        case FIND_ALL_COURSES:
+            return {
+                courses: action.courses
+            }
         default:
             return state;
     }
