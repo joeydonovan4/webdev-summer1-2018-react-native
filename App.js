@@ -1,21 +1,22 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Provider } from 'react-redux';
+import store from './src/store/index';
+import { createStackNavigator } from "react-navigation";
+import Home from "./src/components/Home";
+import CourseListContainer from './src/containers/CourseList';
 
-export default class App extends Component {
+class App extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
-    );
+      <Provider store={store}>
+        <Navigator/>
+      </Provider>
+    )
   }
 }
+export default App;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+const Navigator = createStackNavigator({
+  Home,
+  CourseList: {screen: CourseListContainer}
 });
