@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
-import { View, StyleSheet } from "react-native";
-import { Text, ListItem, List } from "react-native-elements";
+import { View } from "react-native";
+import { ListItem, Card } from "react-native-elements";
 
 class TopicList extends Component {
     static navigationOptions = {title: 'Topics'};
@@ -30,23 +30,14 @@ class TopicList extends Component {
 
     render() {
         return (
-            <View>
-                <Text h4 style={styles.header}>Topics for {this.props.lesson.name}</Text>
-                <List>
+            <Card title={"Topics for " + this.props.lesson.name}>
+                <View>
                     {this.renderTopics()}
-                </List>
-            </View>
+                </View>
+            </Card>
         )
     }
 }
-
-const styles = StyleSheet.create({
-    header: {
-        textAlign: 'center',
-        marginTop: 2,
-        fontWeight: 'bold'
-    }
-});
 
 const stateToPropertiesMapper = (state) => ({
     topics: state.topicReducer.topics,

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
-import { View, StyleSheet } from "react-native";
-import { Text, ListItem, List } from "react-native-elements";
+import { View } from "react-native";
+import { ListItem, Card } from "react-native-elements";
 
 class WidgetList extends Component {
     static navigationOptions = {title: 'Widgets'};
@@ -26,10 +26,11 @@ class WidgetList extends Component {
     render() {
         return (
             <View>
-                <Text h4 style={styles.header}>Widgets for {this.props.topic.name}</Text>
-                <List>
-                    {this.renderWidgets()}
-                </List>
+                <Card title={"Widgets for " + this.props.topic.name}>
+                    <View>
+                        {this.renderWidgets()}
+                    </View>
+                </Card>
             </View>
         )
     }
@@ -38,14 +39,6 @@ class WidgetList extends Component {
 const rightIcon = {
     name: 'info'
 };
-
-const styles = StyleSheet.create({
-    header: {
-        textAlign: 'center',
-        marginTop: 2,
-        fontWeight: 'bold'
-    }
-});
 
 const stateToPropertiesMapper = (state) => ({
     widgets: state.widgetReducer.widgets,
