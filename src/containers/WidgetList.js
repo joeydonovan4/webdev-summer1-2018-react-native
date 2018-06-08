@@ -4,6 +4,7 @@ import * as actions from '../actions/index';
 import { View } from "react-native";
 import { ListItem, Card, Button } from "react-native-elements";
 import WidgetPreviewContainer from "./WidgetPreview";
+import AssignmentListContainer from "./AssignmentList";
 
 class WidgetList extends Component {
     static navigationOptions = {title: 'Widgets'};
@@ -41,7 +42,12 @@ class WidgetList extends Component {
             <View>
                 <Card title={"Widgets for " + this.props.topic.name}>
                     <View>
-                        <Button title="Assignments" style={{margin: 3}}/>
+                        <Button title="Assignments" style={{margin: 3}}
+                            onPress={() => {
+                                this.props.navigation.navigate('AssignmentList', {
+                                    widgets: this.props.widgets
+                                })
+                            }}/>
                         <Button title="Exams" style={{margin: 3}}/>
                     </View>
                     <View>

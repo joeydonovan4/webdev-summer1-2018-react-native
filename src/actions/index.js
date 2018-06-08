@@ -62,6 +62,13 @@ export const exitPreview = dispatch => (
     dispatch({type: constants.EXIT_PREVIEW})
 );
 
+export const filterAssignmentsFromWidgets = (dispatch, widgets) => (
+    dispatch({
+        type: constants.FILTER_ASSIGNMENTS,
+        widgets: widgets
+    })
+)
+
 function getJSON(response) {
     return response.json();
 }
