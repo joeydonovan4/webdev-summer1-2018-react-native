@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index';
 import { View } from "react-native";
-import { ListItem, Card } from "react-native-elements";
+import { ListItem, Card, Button } from "react-native-elements";
 import WidgetPreviewContainer from "./WidgetPreview";
 
 class WidgetList extends Component {
@@ -17,12 +17,14 @@ class WidgetList extends Component {
 
     renderWidgets() {
         if (this.props.widgets) {
-            return this.props.widgets.map(widget => (
-                <ListItem title={widget.name} key={widget.id} rightIcon={rightIcon}
-                    onPressRightIcon={() => {
-                        this.props.showWidgetPreview(widget)
-                    }}/>
-            ));
+            return this.props.widgets.map(widget => {
+                if (widget.widgetType !== 'Assignment' && widget.widgetType !== 'Exam') {
+                    return <ListItem title={widget.name} key={widget.id} rightIcon={rightIcon}
+                        onPressRightIcon={() => {
+                            this.props.showWidgetPreview(widget)
+                        }}/>
+                }
+            });
         }
         return null;
     }
@@ -38,6 +40,10 @@ class WidgetList extends Component {
         return (
             <View>
                 <Card title={"Widgets for " + this.props.topic.name}>
+                    <View>
+                        <Button title="Assignments" style={{margin: 3}}/>
+                        <Button title="Exams" style={{margin: 3}}/>
+                    </View>
                     <View>
                         {this.renderWidgets()}
                     </View>
