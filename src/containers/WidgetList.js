@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions/index';
 import { View } from "react-native";
 import { ListItem, Card } from "react-native-elements";
+import WidgetPreviewContainer from "./WidgetPreview";
 
 class WidgetList extends Component {
     static navigationOptions = {title: 'Widgets'};
@@ -17,8 +18,18 @@ class WidgetList extends Component {
     renderWidgets() {
         if (this.props.widgets) {
             return this.props.widgets.map(widget => (
-                <ListItem title={widget.name} subtitle={widget.description} key={widget.id} rightIcon={rightIcon}/>
+                <ListItem title={widget.name} key={widget.id} rightIcon={rightIcon}
+                    onPressRightIcon={() => {
+                        this.props.showWidgetPreview(widget)
+                    }}/>
             ));
+        }
+        return null;
+    }
+
+    showPreview() {
+        if (this.props.previewMode) {
+            return <WidgetPreviewContainer/>
         }
         return null;
     }
@@ -31,6 +42,7 @@ class WidgetList extends Component {
                         {this.renderWidgets()}
                     </View>
                 </Card>
+                {this.showPreview()}
             </View>
         )
     }
@@ -42,11 +54,13 @@ const rightIcon = {
 
 const stateToPropertiesMapper = (state) => ({
     widgets: state.widgetReducer.widgets,
-    topic: state.widgetReducer.topic
+    topic: state.widgetReducer.topic,
+    previewMode: state.widgetReducer.previewMode
 });
 
 const dispatcherToPropsMapper = dispatch => ({
-    findAllWidgetsForLessonTopic: (lessonId, topic) => actions.findAllWidgetsForLessonTopic(dispatch, lessonId, topic)
+    findAllWidgetsForLessonTopic: (lessonId, topic) => actions.findAllWidgetsForLessonTopic(dispatch, lessonId, topic),
+    showWidgetPreview: (widget) => actions.showWidgetPreview(dispatch, widget)
 });
 
 const WidgetListContainer = connect(

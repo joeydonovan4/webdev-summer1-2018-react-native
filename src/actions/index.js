@@ -51,6 +51,17 @@ export const findAllWidgetsForLessonTopic = (dispatch, lessonId, topic) => {
         }));
 };
 
+export const showWidgetPreview = (dispatch, widget) => (
+    dispatch({
+        type: constants.PREVIEW_WIDGET,
+        widget: widget
+    })
+);
+
+export const exitPreview = dispatch => (
+    dispatch({type: constants.EXIT_PREVIEW})
+);
+
 function getJSON(response) {
     return response.json();
 }
