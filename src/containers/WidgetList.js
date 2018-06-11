@@ -4,7 +4,6 @@ import * as actions from '../actions/index';
 import { View } from "react-native";
 import { ListItem, Card, Button } from "react-native-elements";
 import WidgetPreviewContainer from "./WidgetPreview";
-import AssignmentListContainer from "./AssignmentList";
 
 class WidgetList extends Component {
     static navigationOptions = {title: 'Widgets'};

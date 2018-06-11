@@ -69,6 +69,78 @@ export const filterAssignmentsFromWidgets = (dispatch, widgets) => (
     })
 )
 
+export const getPreviewingAssignment = (dispatch, id) => (
+    dispatch({type: 'GET_PREVIEWING_ASSIGNMENT'})
+);
+
+export const togglePreview = (dispatch, id) => (
+    dispatch({type: constants.SHOW_ASSIGNMENT_PREVIEW, id: id})
+);
+
+export const addAssignment = dispatch => (
+    dispatch({type: constants.ADD_ASSIGNMENT})
+);
+
+export const assignmentNameUpdated = (dispatch, id, name) => (
+    dispatch({
+        type: constants.ASSIGNMENT_NAME_UPDATED,
+        id: id,
+        name: name
+    })
+);
+
+export const assignmentTitleUpdated = (dispatch, id, title) => (
+    dispatch({
+        type: constants.ASSIGNMENT_TITLE_UPDATED,
+        id: id,
+        title: title
+    })
+);
+
+export const assignmentPointsUpdated = (dispatch, id, points) => (
+    dispatch({
+        type: constants.ASSIGNMENT_TITLE_UPDATED,
+        id: id,
+        points: points
+    })
+);
+
+export const assignmentDescriptionUpdated = (dispatch, id, description) => (
+    dispatch({
+        type: constants.ASSIGNMENT_DESCRIPTION_UPDATED,
+        id: id,
+        description: description
+    })
+);
+
+export const assignmentTextUpdated = (dispatch, id, text) => (
+    dispatch({
+        type: constants.ASSIGNMENT_TEXT_UPDATED,
+        id,
+        text
+    })
+);
+
+export const assignmentLinkUpdated = (dispatch, id, link) => (
+    dispatch({
+        type: constants.ASSIGNMENT_LINK_UPDATED,
+        id,
+        link
+    })
+);
+
+export const createWidget = (dispatch, lessonId, topicId, widget) => {
+    return fetch(HOST + '/api/lessons/' + lessonId + '/topics/' + topicId + '/widgets', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(widget)
+    }).then(getJSON).then(newWidget => dispatch({
+
+    }));
+}
+
 function getJSON(response) {
     return response.json();
 }
